@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class Principal {
+    public static void main(String[] args) {
+        Registro registro = new Registro();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Registrar nuevo usuario:");
+        System.out.print("Nombre de usuario: ");
+        String nombreUsuario = scanner.nextLine();
+        System.out.print("Contraseña: ");
+        String contraseña = scanner.nextLine();
+        registro.registrarUsuario(nombreUsuario, contraseña);
+
+        System.out.println("Iniciar sesión:");
+        System.out.print("Nombre de usuario: ");
+        nombreUsuario = scanner.nextLine();
+        System.out.print("Contraseña: ");
+        contraseña = scanner.nextLine();
+
+        Usuario usuario = registro.iniciarSesion(nombreUsuario, contraseña);
+
+        if (usuario != null) {
+            System.out.println("Inicio de sesión exitoso!");
+
+            System.out.print("Ingrese su peso (kg): ");
+            double peso = scanner.nextDouble();
+            System.out.print("Ingrese su altura (m): ");
+            double altura = scanner.nextDouble();
+
+            IMC imc = new IMC(peso, altura);
+            Consulta consulta = new Consulta(usuario, imc);
+
+            System.out.println("Agregar recomendación:");
+            scanner.nextLine();  // Consume newline
+            String recomendacion = scanner.nextLine();
+            consulta.agregarRecomendacion(recomendacion);
+
+            consulta.seguimiento();
+        } else {
+            System.out.println("Nombre de usuario o contraseña incorrectos.");
+        }
+
+        scanner.close();
+    }
+}
