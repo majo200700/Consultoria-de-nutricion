@@ -1,0 +1,31 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Consulta {
+    private Usuario usuario;
+    private IMC imc;
+    private List<String> recomendaciones;
+
+    public Consulta(Usuario usuario, IMC imc) {
+        this.usuario = usuario;
+        this.imc = imc;
+        recomendaciones = new ArrayList<>();
+    }
+
+    public void agregarRecomendacion(String recomendacion) {
+        recomendaciones.add(recomendacion);
+    }
+
+    public void mostrarRecomendaciones() {
+        for (String recomendacion : recomendaciones) {
+            System.out.println(recomendacion);
+        }
+    }
+
+    public void seguimiento() {
+        System.out.println("Usuario: " + usuario.getNombreUsuario());
+        System.out.println("IMC: " + imc.calcularIMC() + " - " + imc.interpretarIMC());
+        System.out.println("Recomendaciones:");
+        mostrarRecomendaciones();
+    }
+}
