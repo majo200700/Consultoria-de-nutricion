@@ -23,20 +23,26 @@ public class Principal {
         if (usuario != null) {
             System.out.println("Inicio de sesión exitoso!");
 
-            System.out.print("Ingrese su peso (kg): ");
-            double peso = scanner.nextDouble();
-            System.out.print("Ingrese su altura (m): ");
-            double altura = scanner.nextDouble();
+            if (usuario instanceof Cliente) {
+                System.out.print("Ingrese su peso (kg): ");
+                double peso = scanner.nextDouble();
+                System.out.print("Ingrese su altura (m): ");
+                double altura = scanner.nextDouble();
 
-            IMC imc = new IMC(peso, altura);
-            Consulta consulta = new Consulta(usuario, imc);
+                IMC imc = new IMC(peso, altura);
+                Consulta consulta = new Consulta(usuario, imc);
 
-            System.out.println("Agregar recomendación:");
-            scanner.nextLine();  // Consume newline
-            String recomendacion = scanner.nextLine();
-            consulta.agregarRecomendacion(recomendacion);
+                System.out.println("Agregar recomendación:");
+                scanner.nextLine();  // Consume newline
+                String recomendacion = scanner.nextLine();
+                consulta.agregarRecomendacion(recomendacion);
 
-            consulta.seguimiento();
+                consulta.seguimiento();
+
+                ((Cliente) usuario).verRecomendaciones(consulta);
+            } else {
+                System.out.println("Usuario no reconocido como cliente.");
+            }
         } else {
             System.out.println("Nombre de usuario o contraseña incorrectos.");
         }
