@@ -1,0 +1,10 @@
+public class Cliente extends Usuario {
+    public Cliente(String nombreUsuario, String contraseña) {
+        super(nombreUsuario, contraseña);
+    }
+
+    public void verRecomendaciones(Consulta consulta) {
+        System.out.println("Recomendaciones para " + getNombreUsuario() + ":");
+        consulta.mostrarRecomendaciones();
+    }
+}
